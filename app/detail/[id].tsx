@@ -76,14 +76,13 @@ export default function TripDetailsScreen() {
                     }))
                 };
 
-                console.log('🎉 Viagem final com diários:', tripWithDiary);
                 setTrip(tripWithDiary);
             } else {
-                console.log('❌ Viagem não encontrada');
+
                 Alert.alert('Erro', 'Viagem não encontrada');
             }
-        } catch (error) {
-            console.error('💥 Erro ao carregar viagem:', error);
+        } catch {
+
             Alert.alert('Erro', 'Não foi possível carregar os detalhes da viagem');
         } finally {
             setLoading(false);
@@ -229,12 +228,7 @@ export default function TripDetailsScreen() {
                     resizeMode="cover"
                 />
                 <View style={styles.overlay} />
-                <TouchableOpacity
-                    style={styles.backButtonFloating}
-                    onPress={() => router.back()}
-                >
-                    <Ionicons name="arrow-back" size={24} color="#fff" />
-                </TouchableOpacity>
+
             </View>
 
             {/* Informações da viagem */}

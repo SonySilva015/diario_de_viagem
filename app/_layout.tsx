@@ -54,7 +54,7 @@ const Viagens = () => {
 
       <Stack.Screen
         name="galeria/[id]"
-        options={{ title: 'galeria da viagem', headerShown: true }}
+        options={{ title: 'galeria da viagem', headerShown: false }}
       />
 
     </Stack>

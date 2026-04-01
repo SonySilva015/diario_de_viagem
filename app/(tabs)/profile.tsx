@@ -192,13 +192,7 @@ export default function ProfileScreen() {
   return (
     <>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-        {/* Header com botão de logout */}
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>Meu Perfil</Text>
-          <TouchableOpacity onPress={handleLogout}>
-            <Ionicons name="log-out-outline" size={24} color="#3b3026" />
-          </TouchableOpacity>
-        </View>
+
 
         {/* Perfil */}
         <View style={styles.profileCenter}>

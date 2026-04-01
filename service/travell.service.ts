@@ -1,6 +1,6 @@
 import { db } from '@/db';
 import { viagem } from '@/db/schemas';
-import { eq } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
 
 /// INSERT - Criar uma nova viagem
 export const insertViagem = async (
@@ -19,7 +19,10 @@ export const insertViagem = async (
 
 // GET - Obter todas as viagens
 export const getViagens = async () => {
-    return await db.select().from(viagem)
+    return await db
+        .select()
+        .from(viagem)
+        .orderBy(desc(viagem.date));
 };
 
 // GET BY ID - Obter viagem por ID

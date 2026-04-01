@@ -108,13 +108,6 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      {/* Header */}
-      <View style={styles.header}>
-        <View style={styles.headerLeft}>
-          <Ionicons name="map-outline" size={28} color="#3b3026" />
-          <Text style={styles.headerTitle}>Diário de viagens</Text>
-        </View>
-      </View>
 
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -261,7 +254,7 @@ export default function HomeScreen() {
       {viagens.length > 0 && (
         <TouchableOpacity
           style={styles.fab}
-          onPress={() => router.push(`/diario/${viagens[0].id}`)}
+          onPress={() => router.push('/(tabs)/viagens')}
         >
           <Ionicons name="add" size={28} color="#fff" />
         </TouchableOpacity>
