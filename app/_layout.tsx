@@ -1,24 +1,64 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { Stack } from "expo-router";
+import React from 'react';
+import { ActivityIndicator, Text, View } from 'react-native';
+import { db } from '../db';
+import migrations from '../drizzle/migrations';
 
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
+const Viagens = () => {
+  const { success, error } = useMigrations(db, migrations);
 
+
+  if (!success && !error) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Erro de migração: {error.message}</Text>
+      </View>
+    );
+  }
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+
+    <Stack
+      screenOptions={{ headerShown: false }}
+    >
+      <Stack.Screen
+        name="index"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="settings"
+        options={{ title: 'configurações', headerShown: true }}
+      />
+      <Stack.Screen
+        name="detail/[id]"
+        options={{ title: 'detalhes da viagem', headerShown: true }}
+      />
+      <Stack.Screen
+        name="edit/[id]"
+        options={{ title: 'editar viagem', headerShown: true }}
+      />
+      <Stack.Screen
+        name="diario/[id]/diario"
+        options={{ title: 'diário da viagem', headerShown: true }}
+      />
+
+      <Stack.Screen
+        name="galeria/[id]"
+        options={{ title: 'galeria da viagem', headerShown: true }}
+      />
+
+    </Stack>
+  )
 }
+
+export default Viagens 
